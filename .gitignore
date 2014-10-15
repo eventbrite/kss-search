@@ -1,0 +1,11 @@
+# Vim
+*~
+*.swp
+*.swo
+
+# npm
+node_modules/
+
+# Campass
+.sass-cache
+.DS_Store
