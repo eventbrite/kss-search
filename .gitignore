@@ -9,3 +9,6 @@ node_modules/
 # Campass
 .sass-cache
 .DS_Store
+
+# KSS Search Working Files
+kss-index.json
