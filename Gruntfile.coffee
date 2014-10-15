@@ -19,7 +19,10 @@ module.exports = (grunt) ->
                     position: 'top'
                     linebreak: true
                     banner: '#!/usr/bin/env node'
-                src: ['dist/main.js']
+                src: [
+                    'dist/index-cli.js',
+                    'dist/search-cli.js'
+                ]
         coffeelint:
             files:
                 src: ['src/**/*.coffee']

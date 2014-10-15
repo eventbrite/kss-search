@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var KSSIndex, Q, indexDB, log, packageJSON, path, program, query, result;
 
 path = require('path');
