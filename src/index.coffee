@@ -38,13 +38,14 @@ class KSSIndex
         destination = destination or DEFAULT_INDEX_FILE
         Q.nfcall fs.writeFile, destination, JSON.stringify(@index.toJSON())
 
-    @load: (source) ->
-        source = source or DEFAULT_INDEX_FILE
-        data = fs.readFileSync source
-        # Q.nfcall fs.readFile, source
-        # .then (data) ->
+    @load: (data) ->
         index = new @()
         index.index = lunr.Index.load(JSON.parse(data))
         return index
+
+    @loadFile: (source) ->
+        source = source or DEFAULT_INDEX_FILE
+        data = fs.readFileSync source
+        @load data
 
 module.exports = KSSIndex

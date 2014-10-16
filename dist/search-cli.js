@@ -23,7 +23,7 @@ query = program.args.join(' ');
 
 log.info("Searching for: " + query);
 
-indexDB = KSSIndex.load(program.index);
+indexDB = KSSIndex.loadFile(program.index);
 
 result = indexDB.search(query);
 

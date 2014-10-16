@@ -55,13 +55,18 @@ KSSIndex = (function() {
     return Q.nfcall(fs.writeFile, destination, JSON.stringify(this.index.toJSON()));
   };
 
-  KSSIndex.load = function(source) {
-    var data, index;
-    source = source || DEFAULT_INDEX_FILE;
-    data = fs.readFileSync(source);
+  KSSIndex.load = function(data) {
+    var index;
     index = new this();
     index.index = lunr.Index.load(JSON.parse(data));
     return index;
+  };
+
+  KSSIndex.loadFile = function(source) {
+    var data;
+    source = source || DEFAULT_INDEX_FILE;
+    data = fs.readFileSync(source);
+    return this.load(data);
   };
 
   return KSSIndex;
