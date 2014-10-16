@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var KSSIndex, Q, indexDB, log, packageJSON, path, program, query, result;
+var KSSIndex, Q, indexDB, log, packageJSON, path, program, query, results;
 
 path = require('path');
 
@@ -25,6 +25,8 @@ log.info("Searching for: " + query);
 
 indexDB = KSSIndex.loadFile(program.index);
 
-result = indexDB.search(query);
+results = indexDB.search(query);
 
-console.log(result);
+results.forEach(function(result) {
+  return console.log(indexDB.get(result.ref));
+});

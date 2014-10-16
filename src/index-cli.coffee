@@ -35,5 +35,8 @@ program.args.forEach (source) ->
 promise = promise.then ->
     indexDB.save program.index
     console.log "saving #{program.index or indexDB.DEFAULT_INDEX_FILE}"
+.fail (err) ->
+    log.error err
+.done()
 
 dfr.resolve()

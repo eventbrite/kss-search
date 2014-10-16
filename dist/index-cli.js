@@ -40,6 +40,8 @@ program.args.forEach(function(source) {
 promise = promise.then(function() {
   indexDB.save(program.index);
   return console.log("saving " + (program.index || indexDB.DEFAULT_INDEX_FILE));
-});
+}).fail(function(err) {
+  return log.error(err);
+}).done();
 
 dfr.resolve();

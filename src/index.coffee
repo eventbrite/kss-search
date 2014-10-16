@@ -18,11 +18,15 @@ class KSSIndex
             @field 'description'
 
     indexSection: (section) ->
-        @index.add
-            section: section.reference()
-            header: section.header()
-            desription: section.description()
-        console.log "indexed #{section.reference()}"
+        data = section.data
+        document =
+            section: data.reference
+            header: data.header
+            description: data.description
+        @index.add document
+        @index.documents ||= {}
+        @index.documents[document.section] = document
+        console.log "indexed #{document.section}"
 
     indexFiles: (path) ->
         console.log path
@@ -34,18 +38,24 @@ class KSSIndex
     search: (query) ->
         @index.search query
 
+    get: (ref) ->
+        return @index.documents?[ref]
+
     save: (destination) ->
         destination = destination or DEFAULT_INDEX_FILE
-        Q.nfcall fs.writeFile, destination, JSON.stringify(@index.toJSON())
+        output = @index.toJSON()
+        output.documents = @index.documents
+        Q.nfcall fs.writeFile, destination, JSON.stringify(output)
 
     @load: (data) ->
         index = new @()
-        index.index = lunr.Index.load(JSON.parse(data))
+        index.index = lunr.Index.load(data)
+        index.index.documents = data.documents
         return index
 
     @loadFile: (source) ->
         source = source or DEFAULT_INDEX_FILE
-        data = fs.readFileSync source
+        data = JSON.parse(fs.readFileSync source)
         @load data
 
 module.exports = KSSIndex

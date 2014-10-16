@@ -25,5 +25,6 @@ query = program.args.join ' '
 log.info "Searching for: #{query}"
 
 indexDB = KSSIndex.loadFile(program.index)
-result = indexDB.search query
-console.log result
+results = indexDB.search query
+results.forEach (result) ->
+    console.log indexDB.get result.ref

@@ -27,12 +27,17 @@ KSSIndex = (function() {
   }
 
   KSSIndex.prototype.indexSection = function(section) {
-    this.index.add({
-      section: section.reference(),
-      header: section.header(),
-      desription: section.description()
-    });
-    return console.log("indexed " + (section.reference()));
+    var data, document, _base;
+    data = section.data;
+    document = {
+      section: data.reference,
+      header: data.header,
+      description: data.description
+    };
+    this.index.add(document);
+    (_base = this.index).documents || (_base.documents = {});
+    this.index.documents[document.section] = document;
+    return console.log("indexed " + document.section);
   };
 
   KSSIndex.prototype.indexFiles = function(path) {
@@ -50,22 +55,31 @@ KSSIndex = (function() {
     return this.index.search(query);
   };
 
+  KSSIndex.prototype.get = function(ref) {
+    var _ref;
+    return (_ref = this.index.documents) != null ? _ref[ref] : void 0;
+  };
+
   KSSIndex.prototype.save = function(destination) {
+    var output;
     destination = destination || DEFAULT_INDEX_FILE;
-    return Q.nfcall(fs.writeFile, destination, JSON.stringify(this.index.toJSON()));
+    output = this.index.toJSON();
+    output.documents = this.index.documents;
+    return Q.nfcall(fs.writeFile, destination, JSON.stringify(output));
   };
 
   KSSIndex.load = function(data) {
     var index;
     index = new this();
-    index.index = lunr.Index.load(JSON.parse(data));
+    index.index = lunr.Index.load(data);
+    index.index.documents = data.documents;
     return index;
   };
 
   KSSIndex.loadFile = function(source) {
     var data;
     source = source || DEFAULT_INDEX_FILE;
-    data = fs.readFileSync(source);
+    data = JSON.parse(fs.readFileSync(source));
     return this.load(data);
   };
 
