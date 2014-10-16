@@ -1,8 +1,11 @@
 {
   "name": "kss-search",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Search Indexer for KSS Documented Styleguides",
-  "main": "index.js",
+  "publishConfig": {
+    "registry": "http://packages:8889"
+  },
+  "main": "./dist/index.js",
   "bin": {
     "kss-index": "./dist/index-cli.js",
     "kss-search": "./dist/search-cli.js"
