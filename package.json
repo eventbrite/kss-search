@@ -23,7 +23,12 @@
       "url": "https://github.com/kevinastone"
     }
   ],
-  "license": "Apache 2.0",
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "LICENSE.md"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/eventbrite/kss-search/issues"
   },
