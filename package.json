@@ -2,6 +2,12 @@
   "name": "kss-search",
   "version": "0.2.1",
   "description": "Search Indexer for KSS Documented Styleguides",
+  "keywords": [
+    "kss",
+    "styleguide",
+    "search",
+    "index"
+  ],
   "main": "./dist/index.js",
   "bin": {
     "kss-index": "./dist/index-cli.js",
