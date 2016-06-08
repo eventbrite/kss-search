@@ -38,7 +38,7 @@
   "homepage": "https://github.com/eventbrite/kss-search",
   "dependencies": {
     "commander": "^2.3.0",
-    "kss": "^1.2.0",
+    "kss": "^2.4.0",
     "lunr": "^0.5.5",
     "q": "^1.0.1",
     "verbalize": "^0.1.2"
